@@ -1,18 +1,9 @@
 name: E2E Tests
 
+# PoC trim: only the repository_dispatch event is kept so that the *approval-gated*
+# dispatch path can be isolated. Everything below the `on:` block is byte-identical
+# to 1Password/kubernetes-secrets-injector .github/workflows/test-e2e.yml at main.
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches: ["**"] # run for PRs targeting any branch (main and others)
-    paths-ignore: &ignore_paths
-      - "docs/**"
-      - "*.md"
-      - ".golangci.yml"
-      - ".gitignore"
-      - "LICENSE"
-  push:
-    branches: [main]
-    paths-ignore: *ignore_paths
   repository_dispatch:
     types: [ok-to-test-command]
 
